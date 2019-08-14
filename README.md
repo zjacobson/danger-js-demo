@@ -1,2 +1,2 @@
 # danger-js-demo
-Danger-js demo
+A demo project to illustrate Danger JS PR check automation
