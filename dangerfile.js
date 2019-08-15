@@ -44,3 +44,4 @@ if (danger.github.pr.deletions > danger.github.pr.additions) {
     `👏 Great job! I see more lines deleted than added. Thanks for keeping us lean!`
   )
 }
+
