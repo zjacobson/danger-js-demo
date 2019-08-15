@@ -1,5 +1,4 @@
 import {message, danger} from "danger"
-import fixme from "danger-plugin-fixme"
 
 const reviewersCount = danger.github.requested_reviewers.users.length
 if (reviewersCount === 0) {
@@ -59,4 +58,3 @@ danger.git.modified_files.map(f => danger.git.diffForFile(f).then(function(diff)
   console.log(diff)
 }))
 
-fixme(["TODO", "FIXME", "XXXX"])
