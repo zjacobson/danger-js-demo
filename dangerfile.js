@@ -32,9 +32,15 @@ if (!ticketPattern.test(prTitle)) {
 }
 
 const prBody = danger.github.pr.body
-const ticketUrlPattern = /https:\/\/venmoinc\.atlassian\.net\/browse\[A-Z]{2,4}-\d+/g
+const ticketUrlPattern = /https:\/\/venmoinc\.atlassian\.net\/browse\/[A-Z]{2,4}-\d+/g
 if (!ticketUrlPattern.test(prBody)) {
   fail(
     "🔍 I can't find the Jira ticket URL in the PR body. Please add a link to the Jira ticket, it's the most efficient way to jump to the corresponding ticket in Jira 🏎"
+  )
+}
+
+if (danger.github.pr.deletions > danger.github.pr.additions) {
+  message(
+    `👏 Great job! I see more lines deleted than added. Thanks for keeping us lean!`
   )
 }
