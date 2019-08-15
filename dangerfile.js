@@ -1,4 +1,5 @@
 import {message, danger} from "danger"
+import fixme from "danger-plugin-fixme"
 
 const reviewersCount = danger.github.requested_reviewers.users.length
 if (reviewersCount === 0) {
@@ -46,21 +47,16 @@ if (danger.github.pr.deletions > danger.github.pr.additions) {
 }
 
 console.log("modified files diffs:")
-pattern = /todo/gi
+pattern = /todo[-: ]*/gi
 danger.git.created_files
       .concat(danger.git.modified_files)
       .map(f => danger.git.diffForFile(f).then(function(diff) {
         if(pattern.test(diff.added)) {
-           warn("New TODO added in " + f + ". Add a Jira ticket for that?")
+           warn("🔍 Found a TODO in " + f + ". Add a Jira ticket for that?")
         }
       }))
 danger.git.modified_files.map(f => danger.git.diffForFile(f).then(function(diff) {
   console.log(diff)
 }))
 
-//danger.git.created_files
-      //.concat(danger.git.modified_files)
-      //.concat(danger.git.deleted_files)
-      //.map(p => danger.git.diffForFile(p).then(function(diff) {
-                                              //console.log(diff)
-      //}))
+fixme(["TODO", "FIXME", "XXXX"])
