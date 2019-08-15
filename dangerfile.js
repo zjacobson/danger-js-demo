@@ -45,3 +45,14 @@ if (danger.github.pr.deletions > danger.github.pr.additions) {
   )
 }
 
+console.log("modified files diffs:")
+danger.git.modified_files.map(f => danger.git.diffForFile(f).then(function(diff) {
+  console.log(diff)
+}))
+
+//danger.git.created_files
+      //.concat(danger.git.modified_files)
+      //.concat(danger.git.deleted_files)
+      //.map(p => danger.git.diffForFile(p).then(function(diff) {
+                                              //console.log(diff)
+      //}))
