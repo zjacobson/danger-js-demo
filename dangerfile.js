@@ -45,3 +45,16 @@ if (danger.github.pr.deletions > danger.github.pr.additions) {
   )
 }
 
+console.log("modified files diffs:")
+pattern = /todo[-: ]*/gi
+danger.git.created_files
+      .concat(danger.git.modified_files)
+      .map(f => danger.git.diffForFile(f).then(function(diff) {
+        if(pattern.test(diff.added)) {
+           warn("🔍 Found a TODO in " + f + ". Add a Jira ticket for that?")
+        }
+      }))
+danger.git.modified_files.map(f => danger.git.diffForFile(f).then(function(diff) {
+  console.log(diff)
+}))
+
